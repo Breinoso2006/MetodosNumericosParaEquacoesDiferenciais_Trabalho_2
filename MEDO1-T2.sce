@@ -84,7 +84,7 @@ end
 
 //Geração de Ci(n+1)
 aux = [0,0];
-for i=1:NosEsp-1; 
+for i=1:NosEsp-1 
     aux(i) = 0; 
 end
 
@@ -97,7 +97,7 @@ for n = 1:NosTemp
         aux2 = aux;
         for i = 1:NosEsp-1
             soma = 0;
-            for j = 1:(i-1);
+            for j = 1:(i-1)
                 soma = soma + M(i,j)*aux(j);
             end
             soma2 = 0;
@@ -115,7 +115,7 @@ end
 for i=1:NosEsp+1 
     if i==1 
         InterCi(i) = Cw;
-    elseif k==NosEsp+1;
+    elseif k==NosEsp+1
         InterCi(i) = Ce;
     else
         InterCi(2:NosEsp) = aux;  
@@ -127,4 +127,4 @@ plot (VetorEsp, InterCi');
 title("Gráfico Espaço X Concentração",'fontsize',3);
 xlabel("t(s)",'fontsize',3);
 ylabel("C(mol/cm^3)",'fontsize',3);
-grid()
+grid();
