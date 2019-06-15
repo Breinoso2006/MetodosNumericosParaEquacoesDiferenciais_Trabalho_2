@@ -14,14 +14,15 @@ l = 300;
 //Variáveis novas que serão utilizadas para cálculo
 NosEsp = input("digite o valor dos nos internos do espaço: "); //MODIFICAR
 NosTemp = input("digite o valor dos nos internos do tempo: "); //MODIFICAR
-TempoTotal = input("digite o valor dos tempo total: "); //MODIFICAR
+TempoTotal = input("digite o valor do tempo total: "); //MODIFICAR
 Dx = l/NosEsp; 
 Dt = TempoTotal/NosTemp; 
 s = a * ((Dt)/(Dx*Dx));
+M = zeros() //Declaração da matriz neutra A que será preechida posteriormente
+VetorCi = [0,1] //Declaração do vetor coluna que apresentará as condições iniciais
 
 //Preenchimento do vetor de espaço com a variação requerida
-
-for i = 1:NosEsp 
+for i = 1:NosEsp+1 
     if i == 1
          VetorEsp(i)= 0;
     else
@@ -30,7 +31,7 @@ for i = 1:NosEsp
 end
 
 //Preenchimento do vetor de tempo com a variação requerida
-for i = 1:NosTemp 
+for i = 1:NosTemp+1 
     if i == 1
         VetorTemp(i) = 0;
     else 
@@ -90,6 +91,7 @@ end
 
 //Aplicação do método iterativo de Jacobi de resolução de sistemas lineares
 InterCi = VetorCi(2:NosEsp);
+
 for n = 1:NosTemp 
     erro = 1;
     f = InterCi + s*(VetorCe' + VetorCw'); 
@@ -115,7 +117,7 @@ end
 for i=1:NosEsp+1 
     if i==1 
         InterCi(i) = Cw;
-    elseif k==NosEsp+1
+    elseif i==NosEsp+1
         InterCi(i) = Ce;
     else
         InterCi(2:NosEsp) = aux;  
@@ -123,8 +125,8 @@ for i=1:NosEsp+1
 end
 
 //Plot do gráfico Espaço X Concetração
-plot (VetorEsp, InterCi');
+plot (VetorEsp, InterCi);
 title("Gráfico Espaço X Concentração",'fontsize',3);
 xlabel("t(s)",'fontsize',3);
 ylabel("C(mol/cm^3)",'fontsize',3);
-grid();
+xgrid();
