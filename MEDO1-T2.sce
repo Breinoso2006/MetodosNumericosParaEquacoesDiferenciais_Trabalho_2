@@ -125,7 +125,7 @@ for i=1:NosEsp+1
 end
 
 //Plot do gráfico Espaço X Concetração
-plot (VetorEsp, InterCi);
+plot (VetorEsp, InterCi');
 title("Gráfico Espaço X Concentração",'fontsize',3);
 xlabel("t(s)",'fontsize',3);
 ylabel("C(mol/cm^3)",'fontsize',3);
