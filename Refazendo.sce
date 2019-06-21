@@ -1,4 +1,4 @@
-clear;
+﻿clear;
 clc;
 close;
 
@@ -16,7 +16,7 @@ varComprimento = 300;
 
 nosEspaco = 61
 nosTempo = 10;
-tempoTotal = 10000000000000000;
+tempoTotal = 100000000;
 
 //disp("Variaveis iniciais para calculo implementadas com sucesso;")
 
@@ -94,7 +94,7 @@ s = (varAlpha*deltaT)/(deltaX * deltaX);
 //        disp(vetorIniciais(i));
     end
 
-//Geraçao da famosa matriz nxn de coeficientes
+//Geraçao da matriz quadrada de coeficientes
 
 M = zeros();
 
@@ -139,10 +139,11 @@ for n = 1:nosTempo
             aux(i) = (1/M(i,i))*(f(i)-(soma1+soma2));
         end
         erro = norm(aux-aux2);
-        disp(x);
-        disp(erro);
+//        disp(aux);
+//        disp(erro);
     end
     vetorInternos = aux'; // o erro está aqui em algum lugar <_<_<_<_<_<_<_<_< tirando o transposto dá merda, mas o outro nosso nao tem
+//    disp(vetorInternos);
 end
 
 for i = 1:nosEspaco+1
@@ -160,5 +161,5 @@ end
 //Plotagem do gráfico de espaco e vetorIniciaisInternos
 
 //Plot do gráfico Espaço X Concetração
-plot (vetorEspaco, vetorInternos')
-xgrid()
+plot (vetorEspaco, vetorInternos');
+xgrid();
