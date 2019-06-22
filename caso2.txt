@@ -15,7 +15,7 @@ varComprimento = 300;
 //Variáveis com valores iniciais, criadas para cálculo
 
 nosEspaco = 61;
-nosTempo = 100000;
+nosTempo = 10;
 tempoTotal = 100;
 tolerancia = 1e-10;
 tempoConvergencia = 50;
@@ -47,19 +47,13 @@ s = (varAlpha*deltaT)/(deltaX * deltaX);
         vetNovo(i) = 0;
     end
     
-    vetAntigo(1) = varCw;
-    vetNovo(1)= varCw;
-    
     for i=2:nosEspaco-1
         vetAntigo(i) = varCi;
         vetNovo(i) = varCi;
     end
     
-    //INSERIMOS MANUALMENTE OS VALORES FINAIS DO VETOR, DE ACORDO COM O QUE SE PEDE
-    vetAntigo(nosEspaco+1) = vetAntigo(nosEspaco-1); //MODIFICADOOOOOOOO
-    vetNovo(nosEspaco+1) = vetNovo(nosEspaco-1); //MODIFICADOOOOOOOO 
-    vetAntigo(nosEspaco) = vetAntigo(nosEspaco+1); //MODIFICADOOOOOOOO
-    vetNovo(nosEspaco) = vetNovo(nosEspaco+1); //MODIFICADOOOOOOOO
+    vetAntigo(1) = varCw;
+    vetNovo(1)= varCw;
     
 //    for i=1:nosEspaco+1
 //        disp(i);
@@ -68,12 +62,17 @@ s = (varAlpha*deltaT)/(deltaX * deltaX);
     
 //Resolução
 
-for t = 1:tempoTotal
+t = 0;
+while t < tempoTotal
+    vetAntigo(nosEspaco+1) = vetAntigo(nosEspaco-1); //MODIFICADOOOOOOOO
+    vetNovo(nosEspaco+1) = vetNovo(nosEspaco-1); //MODIFICADOOOOOOOO 
+    vetAntigo(nosEspaco) = vetAntigo(nosEspaco+1); //MODIFICADOOOOOOOO
+    vetNovo(nosEspaco) = vetNovo(nosEspaco+1); //MODIFICADOOOOOOOO
     for i = 1:tempoConvergencia
         erro = -1;
         for j = 2:nosEspaco
             aux = vetNovo(j);
-            vetNovo(j) = (s*(vetNovo(j-1) + vetNovo(j+1)))/(2*s+1);
+            vetNovo(j) = (s*(vetNovo(j-1) + vetNovo(j+1))+vetAntigo(j))/(2*s+1);
             erro = max(erro,abs((vetNovo(j) - aux)/vetNovo(j)));
         end
         if (erro<tolerancia)
@@ -81,6 +80,7 @@ for t = 1:tempoTotal
         end
     end
     vetAntigo = vetNovo;
+    t = t + deltaT;
 end
 
 //Plot

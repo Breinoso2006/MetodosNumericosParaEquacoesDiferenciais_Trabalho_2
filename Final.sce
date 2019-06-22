@@ -1,4 +1,4 @@
-clear;
+﻿clear;
 clc;
 close;
 
@@ -15,8 +15,8 @@ varComprimento = 300;
 //Variáveis com valores iniciais, criadas para cálculo
 
 nosEspaco = 61;
-nosTempo = 100000;
-tempoTotal = 100;
+nosTempo = 10;
+tempoTotal = 1000;
 tolerancia = 1e-10;
 tempoConvergencia = 50;
 
@@ -50,12 +50,13 @@ s = (varAlpha*deltaT)/(deltaX * deltaX);
 
 //Resolução
 
-for t = 1:tempoTotal
+t=0;
+while t < tempoTotal
     for i = 1:tempoConvergencia
         erro = -1;
         for j = 2:nosEspaco-1
             aux = vetNovo(j);
-            vetNovo(j) = (s*(vetNovo(j-1) + vetNovo(j+1)))/(2*s+1);
+            vetNovo(j) = (s*(vetNovo(j-1) + vetNovo(j+1))+vetAntigo(j))/(2*s+1);
             erro = max(erro,abs((vetNovo(j) - aux)/vetNovo(j)));
         end
         if (erro<tolerancia)
@@ -63,6 +64,7 @@ for t = 1:tempoTotal
         end
     end
     vetAntigo = vetNovo;
+    t = t + deltaT;
 end
 
 //Plot
