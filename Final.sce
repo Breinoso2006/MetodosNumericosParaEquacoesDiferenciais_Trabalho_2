@@ -1,4 +1,4 @@
-﻿clear;
+clear;
 clc;
 close;
 
@@ -10,17 +10,13 @@ varCw = 10;
 varAlpha = 40e-6;
 varComprimento = 300;
 
-//disp("Variaveis da planilha implementadas com sucesso;")
-
 //Variáveis com valores iniciais, criadas para cálculo
 
 nosEspaco = 61;
-nosTempo = 10;
-tempoTotal = 1000;
+nosTempo = 100;
+tempoTotal = 10000000000;
 tolerancia = 1e-10;
 tempoConvergencia = 50;
-
-//disp("Variaveis iniciais para calculo implementadas com sucesso;")
 
 //Variaveis sem valores iniciais, criadas para cálculos
 
@@ -28,17 +24,17 @@ deltaX = varComprimento/nosEspaco;
 deltaT = tempoTotal/nosTempo;
 s = (varAlpha*deltaT)/(deltaX * deltaX);
 
-//disp("Variaveis sem valores iniciais implementadas com sucesso;")
-
 //Vetores utilizados para cálculo
 
     //Vetor de espaço
+    
     vetEspaco(1) = 0;
     for i = 2:nosEspaco
         vetEspaco(i) = vetEspaco(i-1) + deltaX;
     end
-    
+
     //Geração dos vetores com valores de concetração
+    
     vetAntigo(1) = varCw;
     vetNovo(1)= varCw;
     for i=2:nosEspaco-1
@@ -69,7 +65,7 @@ end
 
 //Plot
 
-plot2d(vetEspaco, vetNovo, rect=[0,0,varComprimento,10]);
+plot2d(vetEspaco, vetNovo,2);
 title("Gráfico Espaço X Concentração",'fontsize',3);
 xlabel("Cm",'fontsize',3);
 ylabel("C(mol/cm^3)",'fontsize',3);
