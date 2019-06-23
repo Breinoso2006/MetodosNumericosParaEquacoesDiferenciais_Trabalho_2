@@ -6,7 +6,7 @@ close;
 
 varCi = 0;
 varCw = 10;
-varAlpha = 40e-2;
+varAlpha = 40e-6;
 varComprimento = 300;
 
 //disp("Variaveis da planilha implementadas com sucesso;")
@@ -14,8 +14,8 @@ varComprimento = 300;
 //Variáveis com valores iniciais, criadas para cálculo
 
 nosEspaco = 61;
-nosTempo = 1000;
-tempoTotal = 1000000;
+nosTempo = 100;
+tempoTotal = 1000000000;
 tolerancia = 1e-10;
 tempoConvergencia = 50;
 
@@ -83,6 +83,6 @@ end
 
 plot (vetEspaco, vetNovo);
 title("Gráfico Espaço X Concentração",'fontsize',3);
-xlabel("t(s)",'fontsize',3);
+xlabel("Cm",'fontsize',3);
 ylabel("C(mol/cm^3)",'fontsize',3);
 xgrid();
